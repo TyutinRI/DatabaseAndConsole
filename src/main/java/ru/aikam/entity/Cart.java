@@ -13,7 +13,7 @@ public class Cart {
     private Long id;
     private Date date;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
@@ -24,6 +24,12 @@ public class Cart {
     private List<Good> goods;
 
     public Cart (){}
+
+    public Cart(Date date, Customer customer, List<Good> goods) {
+        this.date = date;
+        this.customer = customer;
+        this.goods = goods;
+    }
 
     public Long getId() {
         return id;

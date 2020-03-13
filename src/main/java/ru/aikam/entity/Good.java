@@ -2,6 +2,7 @@ package ru.aikam.entity;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "goods")
@@ -12,7 +13,13 @@ public class Good {
     private String name;
     private BigDecimal price;
 
+
     public Good (){}
+
+    public Good(String name, BigDecimal price) {
+        this.name = name;
+        this.price = price;
+    }
 
     public Long getId() {
         return id;

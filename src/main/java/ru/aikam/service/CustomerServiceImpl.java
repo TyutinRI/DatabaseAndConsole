@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.aikam.entity.Customer;
 import ru.aikam.repository.CustomerRepository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -29,5 +30,10 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public List<Customer> findByGoodNameAndQuantity(String goodName, Integer quantity) {
         return customerRepository.findByByingGoodNotLessIntTimes(goodName, quantity);
+    }
+
+    @Override
+    public List<Customer> findByMinMaxSpendedMoney(BigDecimal min, BigDecimal max) {
+        return customerRepository.findBySpendedMoneyBetween(min, max);
     }
 }

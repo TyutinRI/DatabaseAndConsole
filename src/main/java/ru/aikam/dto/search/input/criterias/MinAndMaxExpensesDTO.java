@@ -1,29 +1,31 @@
 package ru.aikam.dto.search.input.criterias;
 
+import java.math.BigDecimal;
+
 public class MinAndMaxExpensesDTO {
-    private Integer minExpenses;
-    private Integer maxExpenses;
+    private BigDecimal minExpenses;
+    private BigDecimal maxExpenses;
 
     public MinAndMaxExpensesDTO(){}
 
-    public MinAndMaxExpensesDTO(Integer minExpenses, Integer maxExpenses) {
+    public MinAndMaxExpensesDTO(BigDecimal minExpenses, BigDecimal maxExpenses) {
         this.minExpenses = minExpenses;
         this.maxExpenses = maxExpenses;
     }
 
-    public Integer getMinExpenses() {
+    public BigDecimal getMinExpenses() {
         return minExpenses;
     }
 
-    public void setMinExpenses(Integer minExpenses) {
+    public void setMinExpenses(BigDecimal minExpenses) {
         this.minExpenses = minExpenses;
     }
 
-    public Integer getMaxExpenses() {
+    public BigDecimal getMaxExpenses() {
         return maxExpenses;
     }
 
-    public void setMaxExpenses(Integer maxExpenses) {
+    public void setMaxExpenses(BigDecimal maxExpenses) {
         this.maxExpenses = maxExpenses;
     }
 

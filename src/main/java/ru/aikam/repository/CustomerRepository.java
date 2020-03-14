@@ -41,4 +41,16 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
     List<Customer> findBySpendedMoneyBetween(@Param("minExpenses")BigDecimal minExpenses,
                                              @Param("maxExpenses")BigDecimal maxExpenses);
 
+
+
+    //Метод для работы с критерием "Число пассивных покупателей"
+    @Query(value = "SELECT cus.* FROM customers cus " +
+            "JOIN carts c on cus.id = c.customer_id " +
+            "JOIN cart_good cg on c.id=cg.cart_id JOIN " +
+            "goods g on g.id = cg.good_id " +
+            "GROUP BY cus.id, cus.first_name, cus.last_name " +
+            "ORDER BY COUNT(g.id) " +
+            "LIMIT :badCustomers ;",
+    nativeQuery = true)
+    List<Customer> findBadCuctomers(@Param("badCustomers") Integer badCustomers);
 }

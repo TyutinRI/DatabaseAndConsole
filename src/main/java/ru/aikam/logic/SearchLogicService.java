@@ -3,6 +3,7 @@ package ru.aikam.logic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.aikam.dto.search.input.CriteriaOrErrorDTO;
+import ru.aikam.dto.search.input.criterias.BadCustomerDTO;
 import ru.aikam.dto.search.input.criterias.GoodAndNumberTimesDTO;
 import ru.aikam.dto.search.input.criterias.LastNameSearchDTO;
 import ru.aikam.dto.search.input.criterias.MinAndMaxExpensesDTO;
@@ -108,10 +109,12 @@ public class SearchLogicService {
             if(lm.keySet().contains("minExpenses") && lm.keySet().contains("maxExpenses")) {
                 //проверка типа максимального и минимального значения потрачнных денег
                 if (!(lm.get("minExpenses") instanceof Double)
-                        || !(lm.get("maxExpenses") instanceof Double)){
+                        || !(lm.get("maxExpenses") instanceof Double)
+                        || ((Double) lm.get("minExpenses") < 0)
+                        || ((Double) lm.get("maxExpenses") < 0)){
 
                     //Сообщение об ошибке при неверном параметре критерия
-                    return new ErrorOutputDTO("error", "Неверный параметр критерия!5656");
+                    return new ErrorOutputDTO("error", "Неверный параметр критерия!");
                 } else if(((Double) lm.get("minExpenses")).
                         compareTo((Double) lm.get("maxExpenses")) >= 0){
 
@@ -126,6 +129,25 @@ public class SearchLogicService {
                 //формирование критерия для ответа по поиску по количеству покупок
                 criteria = new MinAndMaxExpensesDTO(BigDecimal.valueOf((Double) lm.get("minExpenses")),
                         BigDecimal.valueOf((Double) lm.get("maxExpenses")));
+            }
+
+
+            //провека на критерий "Число пассивных покупателей"
+            if(lm.keySet().contains("badCustomers")){
+                //проверка яаляется ли название продукта строкой, а минимальное число покупок -
+                // натуральным числом
+                if(!(lm.get("badCustomers") instanceof Integer)
+                        || ((Integer) lm.get("badCustomers") <= 0)){
+
+                    //Сообщение об ошибке при неверном параметре критерия
+                    return new ErrorOutputDTO("error", "Неверный параметр критерия!");
+                }else {
+                    resultCustomers = customerService.findBadCustomers(
+                            (Integer) lm.get("badCustomers")
+                    );
+                }
+                //формирование критерия для ответа по поиску по количеству покупок
+                criteria = new BadCustomerDTO((Integer) lm.get("badCustomers"));
             }
 
             if (resultCustomers == null){

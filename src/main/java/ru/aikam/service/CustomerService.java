@@ -14,4 +14,6 @@ public interface CustomerService {
     List<Customer> findByGoodNameAndQuantity(String goodName, Integer quantity);
 
     List<Customer> findByMinMaxSpendedMoney(BigDecimal min, BigDecimal max);
+
+    List<Customer> findBadCustomers(Integer badCustomers);
 }

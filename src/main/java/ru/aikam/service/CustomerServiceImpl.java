@@ -36,4 +36,9 @@ public class CustomerServiceImpl implements CustomerService {
     public List<Customer> findByMinMaxSpendedMoney(BigDecimal min, BigDecimal max) {
         return customerRepository.findBySpendedMoneyBetween(min, max);
     }
+
+    @Override
+    public List<Customer> findBadCustomers(Integer badCustomers) {
+        return customerRepository.findBadCuctomers(badCustomers);
+    }
 }

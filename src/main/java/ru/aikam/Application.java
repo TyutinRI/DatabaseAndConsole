@@ -8,12 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import ru.aikam.dto.search.input.CriteriaOrErrorDTO;
 import ru.aikam.io.input.SearchInputHandler;
 import ru.aikam.io.output.SearchOutputHandler;
-import ru.aikam.logic.SearchLogic;
-import ru.aikam.service.CartService;
+import ru.aikam.logic.SearchLogicService;
 import ru.aikam.service.CustomerService;
-import ru.aikam.service.GoodService;
-
-import java.util.LinkedHashMap;
 
 @SpringBootApplication
 public class Application implements CommandLineRunner {
@@ -25,7 +21,7 @@ public class Application implements CommandLineRunner {
     @Autowired
     private CustomerService customerService;
     @Autowired
-    private SearchLogic searchLogic;
+    private SearchLogicService searchLogicService;
 
 
     public static void main(String[] args) {
@@ -40,7 +36,7 @@ public class Application implements CommandLineRunner {
 
 
         CriteriaOrErrorDTO c = SearchInputHandler.inputHandle("Criteria1.JSON");
-        SearchOutputHandler.writeResult("result.JSON", searchLogic.makeLogic(c));
+        SearchOutputHandler.writeResult("result.JSON", searchLogicService.makeLogic(c));
 
 
 

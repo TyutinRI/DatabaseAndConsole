@@ -9,4 +9,6 @@ public interface CustomerService {
     void save(Customer customer);
 
     List<Customer> findByLastName(String lastName);
+
+    List<Customer> findByGoodNameAndQuantity(String goodName, Integer quantity);
 }

@@ -25,4 +25,9 @@ public class CustomerServiceImpl implements CustomerService {
     public List<Customer> findByLastName(String lastName) {
         return customerRepository.findByLastNameIgnoreCaseStartingWith(lastName);
     }
+
+    @Override
+    public List<Customer> findByGoodNameAndQuantity(String goodName, Integer quantity) {
+        return customerRepository.findByByingGoodNotLessIntTimes(goodName, quantity);
+    }
 }

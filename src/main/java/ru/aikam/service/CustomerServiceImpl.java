@@ -2,7 +2,6 @@ package ru.aikam.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.aikam.dto.search.output.crirerias.CustomerFirstAndLastNameDTO;
 import ru.aikam.entity.Customer;
 import ru.aikam.repository.CustomerRepository;
 
@@ -24,6 +23,6 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<Customer> findByLastName(String lastName) {
-        return customerRepository.findByLastName(lastName);
+        return customerRepository.findByLastNameIgnoreCaseStartingWith(lastName);
     }
 }

@@ -7,7 +7,7 @@ import ru.aikam.dto.OutputDTO;
 import java.io.File;
 import java.io.IOException;
 
-public class SearchOutputHandler {
+public class OutputHandler {
     public static void writeResult (String outputFileName, OutputDTO result){
         File file = new File(outputFileName);
         ObjectMapper mapper = new ObjectMapper();

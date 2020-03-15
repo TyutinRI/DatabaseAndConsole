@@ -6,7 +6,7 @@ import ru.aikam.dto.search.output.crirerias.CriteriaAndResultListDTO;
 
 import java.util.List;
 
-@JsonTypeName("searchOutputDTO")
+//@JsonTypeName("searchOutputDTO")
 public class SearchOutputDTO extends OutputDTO {
     private List<CriteriaAndResultListDTO> results;
 

@@ -5,17 +5,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import ru.aikam.dto.OutputDTO;
+import ru.aikam.dto.search.input.search.criterias.CriteriaOrErrorDTO;
 import ru.aikam.dto.stat.input.StatOrErrorDTO;
-import ru.aikam.dto.stat.output.CustomerStatDTO;
 import ru.aikam.dto.stat.output.PurchaseDTO;
 import ru.aikam.dto.stat.output.StatOutputDTO;
+import ru.aikam.entity.Cart;
+import ru.aikam.entity.Customer;
+import ru.aikam.entity.Good;
+import ru.aikam.io.input.SearchInputHandler;
 import ru.aikam.io.input.StatInputHandler;
+import ru.aikam.io.output.OutputHandler;
 import ru.aikam.logic.SearchLogicService;
+import ru.aikam.logic.StatLogicService;
+import ru.aikam.repository.CustomerRepository;
 import ru.aikam.service.CartService;
 import ru.aikam.service.CustomerService;
 import ru.aikam.service.GoodService;
 
 import java.math.BigDecimal;
+import java.sql.Date;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -30,7 +41,11 @@ public class Application implements CommandLineRunner {
     @Autowired
     private CustomerService customerService;
     @Autowired
+    private CustomerRepository customerRepository;
+    @Autowired
     private SearchLogicService searchLogicService;
+    @Autowired
+    private StatLogicService statLogicService;
 
 
     public static void main(String[] args) {
@@ -42,33 +57,18 @@ public class Application implements CommandLineRunner {
     public void run(String... args){
 
 
-        List<PurchaseDTO> purchases = new ArrayList<>();
-        purchases.add(new PurchaseDTO("lala", BigDecimal.valueOf(1000)));
-        purchases.add(new PurchaseDTO("laddda", BigDecimal.valueOf(100)));
-        purchases.add(new PurchaseDTO("laddsfsda", BigDecimal.valueOf(10)));
 
-        CustomerStatDTO customerStatDTO = new CustomerStatDTO("name", purchases);
-
-        System.out.println(customerStatDTO);
-
-        CustomerStatDTO customerStatDTO2 = new CustomerStatDTO("name", purchases);
-
-        List<CustomerStatDTO> list = Arrays.asList(customerStatDTO, customerStatDTO2);
-
-        StatOutputDTO statOutputDTO = new StatOutputDTO("tip", 2, list);
-
-        System.out.println(statOutputDTO);
-
-
-//        StatOrErrorDTO s = StatInputHandler.inputHandle("Stat.JSON");
-//        System.out.println(s);
+        StatOrErrorDTO s = StatInputHandler.inputHandle("Stat.JSON");
+        OutputDTO st = statLogicService.makeLogic(s);
+        System.out.println(st);
+        OutputHandler.writeResult("result2.JSON", st);
 
 
 
 
 
 //        CriteriaOrErrorDTO c = SearchInputHandler.inputHandle("Criteria1.JSON");
-//        SearchOutputHandler.writeResult("result.JSON", searchLogicService.makeLogic(c));
+//        OutputHandler.writeResult("result.JSON", searchLogicService.makeLogic(c));
 
 
 
@@ -91,22 +91,19 @@ public class Application implements CommandLineRunner {
 //        Good good3 = new Good("Сахар", BigDecimal.valueOf(10.40));
 //        Good good4 = new Good("Масло", BigDecimal.valueOf(14.20));
 ////
-//        Cart cart1 = new Cart(new Date(2020, 3, 10), customer1,
-//                Arrays.asList(good1, good1, good1, good4));
-//        Cart cart2 = new Cart(new Date(2020, 3, 9), customer1,
-//                Arrays.asList(good2, good1, good4, good4));
-//        Cart cart3 = new Cart(new Date(2020, 3, 10), customer2,
-//                Arrays.asList(good2, good2, good1, good3));
-//        Cart cart4 = new Cart(new Date(2020, 3, 13), customer3,
+//        Cart cart1 = new Cart(Date.valueOf("2020-03-15"), customer1,
+//                Arrays.asList(good1, good4));
+//        Cart cart2 = new Cart(Date.valueOf("2020-03-11"), customer1,
+//                Arrays.asList(good2, good4));
+//        Cart cart3 = new Cart(Date.valueOf("2020-03-13"), customer2,
+//                Arrays.asList(good2, good1, good3));
+//        Cart cart4 = new Cart(Date.valueOf("2020-03-12"), customer3,
 //                Arrays.asList(good4, good4, good4, good4));
-//        Cart cart5 = new Cart(new Date(2020, 3, 12), customer3,
-//                Arrays.asList(good1, good1, good1, good4));
-//        Cart cart6 = new Cart(new Date(2020, 3, 8), customer3,
-//                Arrays.asList(good1, good2, good1, good4));
-//        Cart cart7 = new Cart(new Date(2020, 3, 8), customer1,
-//                Arrays.asList(good2, good2, good3, good4));
-//        Cart cart8 = new Cart(new Date(2020, 3, 8), customer1,
-//                Arrays.asList(good2, good1, good3, good4));
+//        Cart cart5 = new Cart(Date.valueOf("2020-03-16"), customer3,
+//                Arrays.asList(good1, good1, good1));
+//        Cart cart6 = new Cart(Date.valueOf("2020-03-05"), customer3,
+//                Arrays.asList(good1, good2));
+//
 ////
 ////
 //        goodService.save(good1);
@@ -124,8 +121,7 @@ public class Application implements CommandLineRunner {
 //        cartService.save(cart4);
 //        cartService.save(cart5);
 //        cartService.save(cart6);
-//        cartService.save(cart7);
-//        cartService.save(cart8);
+;
 
     }
 }

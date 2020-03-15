@@ -3,10 +3,10 @@ package ru.aikam.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import ru.aikam.dto.search.output.crirerias.CustomerFirstAndLastNameDTO;
 import ru.aikam.entity.Customer;
 
 import java.math.BigDecimal;
+import java.sql.Date;
 import java.util.List;
 
 
@@ -53,4 +53,20 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
             "LIMIT :badCustomers ;",
     nativeQuery = true)
     List<Customer> findBadCuctomers(@Param("badCustomers") Integer badCustomers);
+
+
+
+
+    //Метод для сбора статистики
+    @Query(value = "SELECT g.name, SUM(g.price) " +
+            "FROM carts c " +
+            "JOIN cart_good cg ON c.id=cg.cart_id " +
+            "JOIN goods g ON cg.good_id=g.id " +
+            "JOIN customers cus ON cus.id = c.customer_id " +
+            "WHERE cus.id = :customerId " +
+            "AND c.date BETWEEN :startDate AND :endDate " +
+            "GROUP BY cus.id, g.name;",
+    nativeQuery = true)
+    List<Object[]> findStat(@Param("startDate")Date startDate, @Param("endDate")Date endDate,
+    @Param("customerId")Long customerId);
 }

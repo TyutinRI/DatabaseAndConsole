@@ -27,7 +27,11 @@ public class StatInputHandler {
 
         if(statInputDTO != null) {
             if (statInputDTO.getStartDate() == null || statInputDTO.getEndDate() == null) {
-                massage = "Во входном файле отсутствует одна или обе даты!";
+                massage = "Ошибка! Во входном файле отсутствует одна или обе даты!";
+            }else {
+                if (statInputDTO.getStartDate().compareTo(statInputDTO.getEndDate()) > 0) {
+                    massage = "Ошибка! Стартовая дата больше конечной!";
+                }
             }
         }
 

@@ -7,15 +7,14 @@ import ru.aikam.dto.search.input.search.criterias.BadCustomerDTO;
 import ru.aikam.dto.search.input.search.criterias.GoodAndNumberTimesDTO;
 import ru.aikam.dto.search.input.search.criterias.LastNameSearchDTO;
 import ru.aikam.dto.search.input.search.criterias.MinAndMaxExpensesDTO;
-import ru.aikam.dto.search.output.ErrorOutputDTO;
+import ru.aikam.dto.ErrorOutputDTO;
 import ru.aikam.dto.OutputDTO;
 import ru.aikam.dto.search.output.SearchOutputDTO;
 import ru.aikam.dto.search.output.crirerias.CriteriaAndResultListDTO;
 import ru.aikam.dto.search.output.crirerias.CustomerFirstAndLastNameDTO;
 import ru.aikam.entity.Customer;
-import ru.aikam.service.CartService;
 import ru.aikam.service.CustomerService;
-import ru.aikam.service.GoodService;
+
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -26,22 +25,19 @@ import java.util.List;
 @Component
 public class SearchLogicService {
     private final CustomerService customerService;
-    private final GoodService goodService;
-    private final CartService cartService;
+
 
     @Autowired
-    public SearchLogicService(CustomerService customerService, GoodService goodService, CartService cartService) {
+    public SearchLogicService(CustomerService customerService) {
         this.customerService = customerService;
-        this.goodService = goodService;
-        this.cartService = cartService;
     }
 
     /**
-     * Метод для обратботки данных из входного файла и выполнения манипуляций с базой данных с
+     * Метод для обратботки данных из входного файла с критериями и выполнения манипуляций с базой данных с
      * целью формирования DTO объекта для записи в выходной файл
-     * @param criteriaOrErrorDTO - DTO объект полученный при маппинге входного файла
+     * @param criteriaOrErrorDTO - DTO объект полученный при маппинге входного файла с критериями
      * @return {@link OutputDTO} - выходной DTO. В случае выполнения без ошибок возвращает
-     * {@link SearchOutputDTO} - объект для формирования выходного файла.
+     * {@link SearchOutputDTO} - объект для формирования выходного файла с результатами поиска по критериям.
      * В случае ошибки - возвращает {@link ErrorOutputDTO} - объект для формирования выходного файла
      * с сообщением об ошибке.
      */

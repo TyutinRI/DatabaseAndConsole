@@ -4,9 +4,10 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import ru.aikam.dto.OutputDTO;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
-@JsonTypeName("statOutputDTO")
+//@JsonTypeName("statOutputDTO")
 public class StatOutputDTO extends OutputDTO {
     private Integer totalDays;
     private List<CustomerStatDTO> customers;
@@ -23,7 +24,39 @@ public class StatOutputDTO extends OutputDTO {
         this.totalExpenses = customers.stream().
                 map(customerStatDTO -> customerStatDTO.getTotalExpenses()).
                 reduce((x, y) -> x.add(y)).orElse(null);
-        this.avgExpenses = this.totalExpenses.divide(BigDecimal.valueOf(customers.size()));
+        this.avgExpenses = this.totalExpenses.divide(BigDecimal.valueOf(customers.size()), 2, RoundingMode.HALF_UP);
+    }
+
+    public Integer getTotalDays() {
+        return totalDays;
+    }
+
+    public void setTotalDays(Integer totalDays) {
+        this.totalDays = totalDays;
+    }
+
+    public List<CustomerStatDTO> getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(List<CustomerStatDTO> customers) {
+        this.customers = customers;
+    }
+
+    public BigDecimal getTotalExpenses() {
+        return totalExpenses;
+    }
+
+    public void setTotalExpenses(BigDecimal totalExpenses) {
+        this.totalExpenses = totalExpenses;
+    }
+
+    public BigDecimal getAvgExpenses() {
+        return avgExpenses;
+    }
+
+    public void setAvgExpenses(BigDecimal avgExpenses) {
+        this.avgExpenses = avgExpenses;
     }
 
     @Override

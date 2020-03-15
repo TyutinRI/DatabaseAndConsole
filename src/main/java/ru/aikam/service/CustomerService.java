@@ -1,9 +1,10 @@
 package ru.aikam.service;
 
-import ru.aikam.dto.search.output.crirerias.CustomerFirstAndLastNameDTO;
+import ru.aikam.dto.stat.output.CustomerStatDTO;
 import ru.aikam.entity.Customer;
 
 import java.math.BigDecimal;
+import java.sql.Date;
 import java.util.List;
 
 public interface CustomerService {
@@ -16,4 +17,6 @@ public interface CustomerService {
     List<Customer> findByMinMaxSpendedMoney(BigDecimal min, BigDecimal max);
 
     List<Customer> findBadCustomers(Integer badCustomers);
+
+    List<CustomerStatDTO> findStat(Date startDate, Date endDate);
 }

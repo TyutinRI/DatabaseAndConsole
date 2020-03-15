@@ -65,6 +65,7 @@ public class CustomerServiceImpl implements CustomerService {
                 purchaseList.add(new PurchaseDTO(name, sum));
             }
 
+            //сортировка по убыванию потраченных денег за каждый продукт
             purchaseList.sort(new Comparator<PurchaseDTO>() {
                 @Override
                 public int compare(PurchaseDTO o1, PurchaseDTO o2) {
@@ -76,6 +77,7 @@ public class CustomerServiceImpl implements CustomerService {
             listCustomerStat.add(new CustomerStatDTO(customerName, purchaseList));
         }
 
+        //Сортировка по убыванию потраченных денег на покупателя
         listCustomerStat.sort(new Comparator<CustomerStatDTO>() {
             @Override
             public int compare(CustomerStatDTO o1, CustomerStatDTO o2) {

@@ -3,7 +3,7 @@ package ru.aikam.dto;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import ru.aikam.dto.OutputDTO;
 
-//@JsonTypeName("errorOutputDTO")
+@JsonTypeName("errorOutputDTO")
 public class ErrorOutputDTO extends OutputDTO {
     private String message;
 

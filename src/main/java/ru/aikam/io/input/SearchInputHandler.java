@@ -11,6 +11,9 @@ import java.io.IOException;
 
 public class SearchInputHandler {
 
+    /**
+     * Метод для обработки входного файла с описание критериев.
+     */
     public static CriteriaOrErrorDTO inputHandle(String inputFileName) {
         File file = new File(inputFileName);
         ObjectMapper mapper = new ObjectMapper();

@@ -8,6 +8,10 @@ import java.io.File;
 import java.io.IOException;
 
 public class OutputHandler {
+
+    /**
+     * Метод для записи результатов работы программы в выходой файл в формате JSON
+     */
     public static void writeResult (String outputFileName, OutputDTO result){
         File file = new File(outputFileName);
         ObjectMapper mapper = new ObjectMapper();

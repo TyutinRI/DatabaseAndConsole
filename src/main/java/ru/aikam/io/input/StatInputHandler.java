@@ -9,6 +9,10 @@ import java.io.File;
 import java.io.IOException;
 
 public class StatInputHandler {
+
+    /**
+     * Метод для обработки входного файла с диапазоном дат для сбора статистики
+     */
     public static StatOrErrorDTO inputHandle(String inputFileName){
         File file = new File(inputFileName);
         ObjectMapper mapper = new ObjectMapper();

@@ -1,4 +1,4 @@
-package ru.aikam.dto.search.input;
+package ru.aikam.dto.search.input.search.criterias;
 
 import java.util.Arrays;
 

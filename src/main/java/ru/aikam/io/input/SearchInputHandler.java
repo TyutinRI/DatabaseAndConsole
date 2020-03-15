@@ -2,8 +2,8 @@ package ru.aikam.io.input;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ru.aikam.dto.search.input.CriteriaDTO;
-import ru.aikam.dto.search.input.CriteriaOrErrorDTO;
+import ru.aikam.dto.search.input.search.criterias.CriteriaDTO;
+import ru.aikam.dto.search.input.search.criterias.CriteriaOrErrorDTO;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,7 +24,7 @@ public class SearchInputHandler {
         }  catch (IOException e) {
             massage = "Ошибка! Не существует такого файла с входными данными!";
         }
-        if(massage == null && criteriaDTO.getCriterias() == null){
+        if(massage.equals("ok") && criteriaDTO.getCriterias() == null){
             massage = "Файл с входными данными не содержит критериев поиска!";
         }
         return new CriteriaOrErrorDTO(massage, criteriaDTO);

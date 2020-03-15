@@ -1,4 +1,4 @@
-package ru.aikam.dto.search.input;
+package ru.aikam.dto.search.input.search.criterias;
 
 public class CriteriaOrErrorDTO {
     private String message;
@@ -25,5 +25,13 @@ public class CriteriaOrErrorDTO {
 
     public void setCriteriaDTO(CriteriaDTO criteriaDTO) {
         this.criteriaDTO = criteriaDTO;
+    }
+
+    @Override
+    public String toString() {
+        return "CriteriaOrErrorDTO{" +
+                "message='" + message + '\'' +
+                ", criteriaDTO=" + criteriaDTO +
+                '}';
     }
 }

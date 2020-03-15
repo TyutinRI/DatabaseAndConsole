@@ -2,7 +2,7 @@ package ru.aikam.io.output;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import ru.aikam.dto.search.output.OutputDTO;
+import ru.aikam.dto.OutputDTO;
 
 import java.io.File;
 import java.io.IOException;

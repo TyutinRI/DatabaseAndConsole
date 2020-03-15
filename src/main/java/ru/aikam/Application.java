@@ -5,20 +5,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import ru.aikam.dto.search.input.CriteriaOrErrorDTO;
-import ru.aikam.entity.Cart;
-import ru.aikam.entity.Customer;
-import ru.aikam.entity.Good;
-import ru.aikam.io.input.SearchInputHandler;
-import ru.aikam.io.output.SearchOutputHandler;
+import ru.aikam.dto.stat.input.StatOrErrorDTO;
+import ru.aikam.dto.stat.output.CustomerStatDTO;
+import ru.aikam.dto.stat.output.PurchaseDTO;
+import ru.aikam.dto.stat.output.StatOutputDTO;
+import ru.aikam.io.input.StatInputHandler;
 import ru.aikam.logic.SearchLogicService;
 import ru.aikam.service.CartService;
 import ru.aikam.service.CustomerService;
 import ru.aikam.service.GoodService;
 
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 @SpringBootApplication
 public class Application implements CommandLineRunner {
@@ -42,8 +42,33 @@ public class Application implements CommandLineRunner {
     public void run(String... args){
 
 
-        CriteriaOrErrorDTO c = SearchInputHandler.inputHandle("Criteria1.JSON");
-        SearchOutputHandler.writeResult("result.JSON", searchLogicService.makeLogic(c));
+        List<PurchaseDTO> purchases = new ArrayList<>();
+        purchases.add(new PurchaseDTO("lala", BigDecimal.valueOf(1000)));
+        purchases.add(new PurchaseDTO("laddda", BigDecimal.valueOf(100)));
+        purchases.add(new PurchaseDTO("laddsfsda", BigDecimal.valueOf(10)));
+
+        CustomerStatDTO customerStatDTO = new CustomerStatDTO("name", purchases);
+
+        System.out.println(customerStatDTO);
+
+        CustomerStatDTO customerStatDTO2 = new CustomerStatDTO("name", purchases);
+
+        List<CustomerStatDTO> list = Arrays.asList(customerStatDTO, customerStatDTO2);
+
+        StatOutputDTO statOutputDTO = new StatOutputDTO("tip", 2, list);
+
+        System.out.println(statOutputDTO);
+
+
+//        StatOrErrorDTO s = StatInputHandler.inputHandle("Stat.JSON");
+//        System.out.println(s);
+
+
+
+
+
+//        CriteriaOrErrorDTO c = SearchInputHandler.inputHandle("Criteria1.JSON");
+//        SearchOutputHandler.writeResult("result.JSON", searchLogicService.makeLogic(c));
 
 
 

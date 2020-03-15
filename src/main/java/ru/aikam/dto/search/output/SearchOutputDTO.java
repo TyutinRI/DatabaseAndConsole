@@ -1,6 +1,7 @@
 package ru.aikam.dto.search.output;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import ru.aikam.dto.OutputDTO;
 import ru.aikam.dto.search.output.crirerias.CriteriaAndResultListDTO;
 
 import java.util.List;

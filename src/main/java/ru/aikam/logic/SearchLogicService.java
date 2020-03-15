@@ -2,13 +2,13 @@ package ru.aikam.logic;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.aikam.dto.search.input.CriteriaOrErrorDTO;
-import ru.aikam.dto.search.input.criterias.BadCustomerDTO;
-import ru.aikam.dto.search.input.criterias.GoodAndNumberTimesDTO;
-import ru.aikam.dto.search.input.criterias.LastNameSearchDTO;
-import ru.aikam.dto.search.input.criterias.MinAndMaxExpensesDTO;
+import ru.aikam.dto.search.input.search.criterias.CriteriaOrErrorDTO;
+import ru.aikam.dto.search.input.search.criterias.BadCustomerDTO;
+import ru.aikam.dto.search.input.search.criterias.GoodAndNumberTimesDTO;
+import ru.aikam.dto.search.input.search.criterias.LastNameSearchDTO;
+import ru.aikam.dto.search.input.search.criterias.MinAndMaxExpensesDTO;
 import ru.aikam.dto.search.output.ErrorOutputDTO;
-import ru.aikam.dto.search.output.OutputDTO;
+import ru.aikam.dto.OutputDTO;
 import ru.aikam.dto.search.output.SearchOutputDTO;
 import ru.aikam.dto.search.output.crirerias.CriteriaAndResultListDTO;
 import ru.aikam.dto.search.output.crirerias.CustomerFirstAndLastNameDTO;
@@ -21,7 +21,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 
 @Component
@@ -56,6 +55,11 @@ public class SearchLogicService {
         //Создание списка DTO для возвращения информации о критерии, и результате поиска
         List<CriteriaAndResultListDTO> resultList = new ArrayList<>();
         Object[] criterias = criteriaOrErrorDTO.getCriteriaDTO().getCriterias();
+
+        if (criterias.length == 0){
+            return new ErrorOutputDTO("error", "Файл с входными данными не содержит критериев поиска!");
+        }
+
         for (Object o : criterias) {
 
             //Приведение каждого критерия к LinkedHashMap<String, Object> для расшифровки

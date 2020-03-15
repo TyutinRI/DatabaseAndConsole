@@ -1,4 +1,4 @@
-package ru.aikam.dto.search.input.criterias;
+package ru.aikam.dto.search.input.search.criterias;
 
 public class BadCustomerDTO {
     private Integer badCustomers;

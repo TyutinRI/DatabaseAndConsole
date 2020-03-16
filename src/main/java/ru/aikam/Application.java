@@ -53,7 +53,7 @@ public class Application implements CommandLineRunner {
     @Override
     public void run(String... args){
 
-        if(args.length<3){
+        if(args.length!=3){
             System.err.println("Неверное число аргументов!!!");
             OutputHandler.writeResult("Error.JSON",
                     new ErrorOutputDTO("ERROR!!!", "Неверное число аргументов!!!"));

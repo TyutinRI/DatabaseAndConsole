@@ -27,8 +27,6 @@ public class StatInputHandler {
             massage = "Ошибка! Не существует такого файла с входными данными!";
         }
 
-        System.out.println(statInputDTO);
-
         if(statInputDTO != null) {
             if (statInputDTO.getStartDate() == null || statInputDTO.getEndDate() == null) {
                 massage = "Ошибка! Во входном файле отсутствует одна или обе даты!";

@@ -75,7 +75,7 @@ public class SearchLogicService {
                 } else {
 
                     //Сообщение об ошибке при нестроковом параметре критерия
-                    return new ErrorOutputDTO("error", "Неверный параметр критерия!");
+                    return new ErrorOutputDTO("error", "Неверный параметр критерия 'Фамилия'!");
                 }
                 //формирование критерия для ответа по поиску по Фамилии
                 criteria = new LastNameSearchDTO((String) lm.get("lastName"));
@@ -91,7 +91,8 @@ public class SearchLogicService {
                 || ((Integer) lm.get("minTimes") <= 0)){
 
                     //Сообщение об ошибке при неверном параметре критерия
-                    return new ErrorOutputDTO("error", "Неверный параметр критерия!");
+                    return new ErrorOutputDTO("error", "Неверный параметр критерия " +
+                            "'Название товара и число раз'!");
                 } else {
                     resultCustomers =
                             customerService.findByGoodNameAndQuantity(
@@ -114,7 +115,9 @@ public class SearchLogicService {
                         || ((Double) lm.get("maxExpenses") < 0)){
 
                     //Сообщение об ошибке при неверном параметре критерия
-                    return new ErrorOutputDTO("error", "Неверный параметр критерия!");
+                    return new ErrorOutputDTO("error", "Неверный параметр критерия " +
+                            "'Минимальная и максимальная стоимость всех покупок'! " +
+                            "Нужно ввести десятичную дробь, например 10.0");
                 } else if(((Double) lm.get("minExpenses")).
                         compareTo((Double) lm.get("maxExpenses")) >= 0){
 
@@ -140,7 +143,8 @@ public class SearchLogicService {
                         || ((Integer) lm.get("badCustomers") <= 0)){
 
                     //Сообщение об ошибке при неверном параметре критерия
-                    return new ErrorOutputDTO("error", "Неверный параметр критерия!");
+                    return new ErrorOutputDTO("error", "Неверный параметр критерия " +
+                            "'Число пассивных покупателей'!");
                 }else {
                     resultCustomers = customerService.findBadCustomers(
                             (Integer) lm.get("badCustomers")

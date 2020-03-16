@@ -42,6 +42,7 @@ public class StatLogicService {
 
         List<CustomerStatDTO> customerStatDTOList = customerService.findStat(
                 statOrErrorDTO.getStatInputDTO().getStartDate(),
+                //прибавляется один день для включения в статистику конечной даты
                 Date.valueOf(statOrErrorDTO.getStatInputDTO().getEndDate().toLocalDate().plusDays(1))
         );
 
@@ -57,7 +58,7 @@ public class StatLogicService {
     private int countOfWorkDays(Date first, Date second){
 
         LocalDate ld1 = first.toLocalDate();
-        LocalDate ld2 = second.toLocalDate().plusDays(1);
+        LocalDate ld2 = second.toLocalDate();
 
         int workDaysCount = 0;
         for(LocalDate ld = ld1; ld.compareTo(ld2) <= 0 ;ld = ld.plusDays(1)){

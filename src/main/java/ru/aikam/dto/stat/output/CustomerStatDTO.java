@@ -16,7 +16,7 @@ public class CustomerStatDTO {
         this.purchases = purchases;
         this.totalExpenses = purchases.stream().
                 map(purchaseDTO -> purchaseDTO.getExpenses()).
-                reduce((x, y) -> x.add(y)).orElse(null);
+                reduce((x, y) -> x.add(y)).orElse(BigDecimal.valueOf(0));
     }
 
     public String getName() {

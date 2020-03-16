@@ -23,7 +23,7 @@ public class StatOutputDTO extends OutputDTO {
         this.customers = customers;
         this.totalExpenses = customers.stream().
                 map(customerStatDTO -> customerStatDTO.getTotalExpenses()).
-                reduce((x, y) -> x.add(y)).orElse(null);
+                reduce((x, y) -> x.add(y)).orElse(BigDecimal.valueOf(0));
         this.avgExpenses = this.totalExpenses.divide(BigDecimal.valueOf(customers.size()), 2, RoundingMode.HALF_UP);
     }
 

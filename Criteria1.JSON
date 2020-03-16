@@ -1,0 +1,12 @@
+{
+  "criterias": [
+    {"lastName": "жУк"},
+    {"lastName": "Жуков"},
+    {"productName": "хЛеБ", "minTimes": 3},
+    {"productName": "соль", "minTimes": 1},
+    {"minExpenses": 1.0, "maxExpenses": 120.0},
+    {"minExpenses": 10.0, "maxExpenses": 60.0},
+    {"badCustomers": 2},
+    {"badCustomers": 1}
+  ]
+}

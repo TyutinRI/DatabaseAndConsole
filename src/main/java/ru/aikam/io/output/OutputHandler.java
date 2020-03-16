@@ -19,7 +19,7 @@ public class OutputHandler {
         try {
             mapper.writeValue(file, result);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Ошибка записи в файл!");
         }
     }
 }

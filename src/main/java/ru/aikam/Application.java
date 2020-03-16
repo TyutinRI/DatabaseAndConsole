@@ -34,11 +34,6 @@ import java.util.List;
 @SpringBootApplication
 public class Application implements CommandLineRunner {
 
-
-    @Autowired
-    private CustomerService customerService;
-    @Autowired
-    private CustomerRepository customerRepository;
     @Autowired
     private SearchLogicService searchLogicService;
     @Autowired

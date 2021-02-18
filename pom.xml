@@ -12,7 +12,7 @@
     <description>Service for working with database by command line</description>
 
     <properties>
-        <jackson.verson>2.10.2</jackson.verson>
+        <jackson.verson>2.12.1</jackson.verson>
     </properties>
 
     <parent>
